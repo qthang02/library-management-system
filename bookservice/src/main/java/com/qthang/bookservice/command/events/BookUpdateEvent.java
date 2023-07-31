@@ -1,21 +1,10 @@
-package com.qthang.bookservice.command.command;
+package com.qthang.bookservice.command.events;
 
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
-
-public class CreateBookCommand {
-    @TargetAggregateIdentifier
+public class BookUpdateEvent {
     private String bookId;
     private String name;
     private String author;
     private Boolean isReady;
-
-    public CreateBookCommand(String bookId, String name, String author, Boolean isReady) {
-        super();
-        this.bookId = bookId;
-        this.name = name;
-        this.author = author;
-        this.isReady = isReady;
-    }
 
     public String getBookId() {
         return bookId;

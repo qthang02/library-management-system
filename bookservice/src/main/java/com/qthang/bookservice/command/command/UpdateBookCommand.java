@@ -2,14 +2,14 @@ package com.qthang.bookservice.command.command;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
-public class CreateBookCommand {
+public class UpdateBookCommand {
     @TargetAggregateIdentifier
     private String bookId;
     private String name;
     private String author;
     private Boolean isReady;
 
-    public CreateBookCommand(String bookId, String name, String author, Boolean isReady) {
+    public UpdateBookCommand(String bookId, String name, String author, Boolean isReady) {
         super();
         this.bookId = bookId;
         this.name = name;
