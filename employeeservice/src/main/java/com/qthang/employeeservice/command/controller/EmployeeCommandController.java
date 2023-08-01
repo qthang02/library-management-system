@@ -1,6 +1,7 @@
 package com.qthang.employeeservice.command.controller;
 
 import com.qthang.employeeservice.command.command.CreateEmployeeCommand;
+import com.qthang.employeeservice.command.command.DeleteEmployeeCommand;
 import com.qthang.employeeservice.command.command.UpdateEmployeeCommand;
 import com.qthang.employeeservice.command.model.EmployeeRequestModel;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -33,5 +34,12 @@ public class EmployeeCommandController {
         commandGateway.sendAndWait(command);
 
         return "updated employee";
+    }
+
+    @DeleteMapping("/{employeeId}")
+    public String deleteEmployee(@PathVariable String employeeId) {
+        DeleteEmployeeCommand command = new DeleteEmployeeCommand(employeeId);
+        commandGateway.sendAndWait(command);
+        return "emmployee deleted";
     }
 }

@@ -1,8 +1,10 @@
 package com.qthang.employeeservice.command.aggregate;
 
 import com.qthang.employeeservice.command.command.CreateEmployeeCommand;
+import com.qthang.employeeservice.command.command.DeleteEmployeeCommand;
 import com.qthang.employeeservice.command.command.UpdateEmployeeCommand;
 import com.qthang.employeeservice.command.event.EmployeeCreatedEvent;
+import com.qthang.employeeservice.command.event.EmployeeDeletedEvent;
 import com.qthang.employeeservice.command.event.EmployeeUpdatedEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
@@ -36,6 +38,13 @@ public class EmployeeAggregate {
         AggregateLifecycle.apply(event);
     }
 
+    @CommandHandler
+    public void handle(DeleteEmployeeCommand command) {
+        EmployeeDeletedEvent event = new EmployeeDeletedEvent();
+        event.setEmployeeId(command.getEmployeeId());
+        AggregateLifecycle.apply(event);
+    }
+
     @EventSourcingHandler
     public void on(EmployeeCreatedEvent event) {
         this.employeeId = event.getEmployeeId();
@@ -52,5 +61,10 @@ public class EmployeeAggregate {
         this.lastName = event.getLastName();
         this.kin = event.getKin();
         this.isDisciplined = event.getIsDisciplined();
+    }
+
+    @EventSourcingHandler
+    public void on(EmployeeDeletedEvent event) {
+        this.employeeId = event.getEmployeeId();
     }
 }

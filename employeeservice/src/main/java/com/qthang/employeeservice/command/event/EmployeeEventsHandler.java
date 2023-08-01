@@ -28,4 +28,9 @@ public class EmployeeEventsHandler {
         employee.setIsDisciplined(event.getIsDisciplined());
         employeeRepository.save(employee);
     }
+
+    @EventHandler
+    public void on(EmployeeDeletedEvent event) {
+        employeeRepository.deleteById(event.getEmployeeId());
+    }
 }
