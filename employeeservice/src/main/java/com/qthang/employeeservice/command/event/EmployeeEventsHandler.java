@@ -18,4 +18,14 @@ public class EmployeeEventsHandler {
         BeanUtils.copyProperties(event, employee);
         employeeRepository.save(employee);
     }
+
+    @EventHandler
+    public void on(EmployeeUpdatedEvent event) {
+        Employee employee = employeeRepository.getById(event.getEmployeeId());
+        employee.setFirstName(event.getFirstName());
+        employee.setLastName(event.getLastName());
+        employee.setKin(event.getKin());
+        employee.setIsDisciplined(event.getIsDisciplined());
+        employeeRepository.save(employee);
+    }
 }
